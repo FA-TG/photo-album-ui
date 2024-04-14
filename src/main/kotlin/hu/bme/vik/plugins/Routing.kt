@@ -1,6 +1,7 @@
 package hu.bme.vik.plugins
 
 import hu.bme.vik.repository.PictureRepository
+import hu.bme.vik.templates.LayoutTemplate
 import hu.bme.vik.utils.format
 import hu.bme.vik.utils.toBufferedImage
 import io.ktor.http.*
@@ -29,14 +30,11 @@ fun Application.configureRouting() {
         get("/list") {
             val posts = repository.getAllPicture()
 
-            call.respondHtml {
-                body {
-                    div {
-                        a {
-                            href = "/upload"
-                            p { +"Upload" }
-                        }
-                    }
+            call.respondHtmlTemplate(LayoutTemplate()) {
+                articleTitle {
+                    +"List"
+                }
+                content {
                     posts.forEach { post ->
                         div {
                             div {
@@ -62,11 +60,14 @@ fun Application.configureRouting() {
             call.respondBytes(repository.getPicture(name))
         }
 
-        authenticate("auth-session") {
+        authenticate("auth-form") {
             route("upload") {
                 get {
-                    call.respondHtml {
-                        body {
+                    call.respondHtmlTemplate(LayoutTemplate()) {
+                        articleTitle {
+                            +"Upload"
+                        }
+                        content {
                             form(action = "/upload", encType = FormEncType.multipartFormData, method = FormMethod.post) {
                                 p {
                                     +"Image:"

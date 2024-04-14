@@ -18,7 +18,7 @@ import javax.imageio.ImageIO
 
 class PictureRepository(
     database: MongoDatabase,
-    bucketName: String,
+    bucketName: String
 ) {
     private val bucket = GridFSBuckets.create(database, bucketName)
 

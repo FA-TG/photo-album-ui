@@ -36,6 +36,8 @@ dependencies {
 
     implementation("io.ktor:ktor-server-html-builder")
 
+    implementation("org.mindrot:jbcrypt:0.4")
+
     // Koin for Ktor
     implementation("io.insert-koin:koin-ktor:3.5.0")
     implementation("io.insert-koin:koin-logger-slf4j:3.5.0")
