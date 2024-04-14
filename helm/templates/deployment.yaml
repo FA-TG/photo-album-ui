@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.env.APP_NAME }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.env.APP_NAME }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.env.APP_NAME }}
+    spec:
+      containers:
+        - name: {{ .Values.env.APP_NAME }}
+          image: akos0628/{{ .Values.env.APP_NAME }}:{{ .Values.env.APP_VERSION }}
+          env:
+            {{- range $key, $val := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3

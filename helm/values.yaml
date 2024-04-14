@@ -1,0 +1,3 @@
+env:
+  APP_VERSION: b9e1ae94fb9836641329def0fbb17e2e7e94a0c5
+  APP_NAME: photo-album-ui
