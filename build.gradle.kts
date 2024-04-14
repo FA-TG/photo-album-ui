@@ -27,6 +27,8 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
 
+    implementation("io.ktor:ktor-server-auth")
+    implementation("io.ktor:ktor-server-sessions")
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
@@ -34,8 +36,12 @@ dependencies {
 
     implementation("io.ktor:ktor-server-html-builder")
 
+    // Koin for Ktor
     implementation("io.insert-koin:koin-ktor:3.5.0")
     implementation("io.insert-koin:koin-logger-slf4j:3.5.0")
+
+    // Mongodb
+    implementation("org.litote.kmongo:kmongo-coroutine:4.11.0")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
