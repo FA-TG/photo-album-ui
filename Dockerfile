@@ -1,1 +1,1 @@
-FROM akos0628/photo-album-ui:7c1b04b4478f942a1b9986309c6dcc935be0403a
+FROM akos0628/photo-album-ui:6ac6edc4f2b63566bde18b60338b63ae6f6d902e
