@@ -32,6 +32,11 @@ jobs:
           git commit -m "Update Dockerfile"
           git push
 
+  openshift-webhook:
+    runs-on: ubuntu-latest
+    needs: [build-and-deploy]
+
+    steps:
       - name: Invoke deployment hook
         uses: distributhor/workflow-webhook@v3
         with:
