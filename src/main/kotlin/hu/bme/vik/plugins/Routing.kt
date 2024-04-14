@@ -39,18 +39,46 @@ fun Application.configureRouting() {
                 content {
                     posts.forEach { post ->
                         div {
-                            div {
-                                img {
-                                    src = "/images/${post.name}"
-                                    alt = "Post image"
+                            a {
+                                href = "/detail/${post.name}"
+                                div {
+                                    p { +"Name: ${post.name}" }
+                                }
+                                div {
+                                    p { +"Date: ${post.date.format()}" }
                                 }
                             }
-                            div {
-                                p { +"Name: ${post.name}" }
+                            hr {  }
+                        }
+                    }
+                }
+            }
+        }
+        get("/detail/{name}") {
+            val name = call.parameters["name"]!!
+            val post = repository.getByName(name)
+
+            if (post == null) {
+                call.respondRedirect("/list")
+            }
+
+            call.respondHtmlTemplate(LayoutTemplate(call.sessions.get<UserSession>())) {
+                articleTitle {
+                    +"Detail"
+                }
+                content {
+                    div {
+                        div {
+                            img {
+                                src = "/images/${post!!.name}"
+                                alt = "Post image"
                             }
-                            div {
-                                p { +"Date: ${post.date.format()}" }
-                            }
+                        }
+                        div {
+                            p { +"Name: ${post!!.name}" }
+                        }
+                        div {
+                            p { +"Date: ${post!!.date.format()}" }
                         }
                     }
                 }

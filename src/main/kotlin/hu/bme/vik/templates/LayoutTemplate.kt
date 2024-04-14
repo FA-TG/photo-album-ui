@@ -9,7 +9,7 @@ class LayoutTemplate(val userSession: UserSession?): Template<HTML> {
     val content = Placeholder<FlowContent>()
     override fun HTML.apply() {
         head {
-            link(rel = "stylesheet", href = "style/index.css", type = "text/css")
+            link(rel = "stylesheet", href = "/style/index.css", type = "text/css")
         }
         body {
             h1 {

@@ -4,10 +4,12 @@ import com.mongodb.reactivestreams.client.MongoDatabase
 import com.mongodb.reactivestreams.client.gridfs.GridFSBuckets
 import hu.bme.vik.model.Post
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.withContext
+import org.litote.kmongo.bson
 import org.litote.kmongo.coroutine.coroutine
 import org.reactivestreams.Publisher
 import java.awt.image.BufferedImage
@@ -48,6 +50,16 @@ class PictureRepository(
                 it.uploadDate.toInstant()
             )
         }.toList()
+
+    suspend fun getByName(name: String) = bucket
+        .find("{ filename : '$name' }".bson)
+        .asFlow()
+        .map {
+            Post(
+                it.filename.toString(),
+                it.uploadDate.toInstant()
+            )
+        }.firstOrNull()
 
     suspend fun getPicture(id: String): ByteArray {
         val byteBuffers: MutableList<ByteBuffer> = mutableListOf()
