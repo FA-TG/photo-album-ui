@@ -1,9 +1,10 @@
 package hu.bme.vik.templates
 
+import hu.bme.vik.model.UserSession
 import io.ktor.server.html.*
 import kotlinx.html.*
 
-class LayoutTemplate: Template<HTML> {
+class LayoutTemplate(val userSession: UserSession?): Template<HTML> {
     val articleTitle = Placeholder<FlowContent>()
     val content = Placeholder<FlowContent>()
     override fun HTML.apply() {
@@ -26,22 +27,25 @@ class LayoutTemplate: Template<HTML> {
                     p { +"Upload" }
                 }
             }
-            div {
-                a {
-                    href = "/login"
-                    p { +"Login" }
+            userSession?.let {
+                div {
+                    a {
+                        href = "/logout"
+                        p { +"Logout" }
+                    }
                 }
-            }
-            div {
-                a {
-                    href = "/logout"
-                    p { +"Logout" }
+            } ?: run {
+                div {
+                    a {
+                        href = "/login"
+                        p { +"Login" }
+                    }
                 }
-            }
-            div {
-                a {
-                    href = "/register"
-                    p { +"Register" }
+                div {
+                    a {
+                        href = "/register"
+                        p { +"Register" }
+                    }
                 }
             }
 

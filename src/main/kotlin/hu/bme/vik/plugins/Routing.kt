@@ -1,5 +1,6 @@
 package hu.bme.vik.plugins
 
+import hu.bme.vik.model.UserSession
 import hu.bme.vik.repository.PictureRepository
 import hu.bme.vik.templates.LayoutTemplate
 import hu.bme.vik.utils.format
@@ -14,6 +15,7 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.sessions.*
 import kotlinx.html.*
 import org.koin.ktor.ext.inject
 
@@ -30,7 +32,7 @@ fun Application.configureRouting() {
         get("/list") {
             val posts = repository.getAllPicture()
 
-            call.respondHtmlTemplate(LayoutTemplate()) {
+            call.respondHtmlTemplate(LayoutTemplate(call.sessions.get<UserSession>())) {
                 articleTitle {
                     +"List"
                 }
@@ -63,7 +65,7 @@ fun Application.configureRouting() {
         authenticate("auth-form") {
             route("upload") {
                 get {
-                    call.respondHtmlTemplate(LayoutTemplate()) {
+                    call.respondHtmlTemplate(LayoutTemplate(call.sessions.get<UserSession>())) {
                         articleTitle {
                             +"Upload"
                         }

@@ -18,7 +18,7 @@ fun Application.configureFormLogin() {
 
     routing {
         get("/login") {
-            call.respondHtmlTemplate(LayoutTemplate()) {
+            call.respondHtmlTemplate(LayoutTemplate(call.sessions.get<UserSession>())) {
                 articleTitle {
                     +"Login"
                 }
@@ -52,7 +52,7 @@ fun Application.configureFormLogin() {
         }
         route("/register") {
             get {
-                call.respondHtmlTemplate(LayoutTemplate()) {
+                call.respondHtmlTemplate(LayoutTemplate(call.sessions.get<UserSession>())) {
                     articleTitle {
                         +"Register"
                     }
