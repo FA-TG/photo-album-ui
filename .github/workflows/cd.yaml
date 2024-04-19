@@ -37,7 +37,11 @@ jobs:
     needs: [build-and-deploy]
 
     steps:
-      - name: Invoke deployment hook
+      - name: Invoke deployment hook for Akos
         uses: distributhor/workflow-webhook@v3
         with:
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
+          webhook_url: ${{ secrets.WEBHOOK_URL_AKOS }}
+      - name: Invoke deployment hook for Geri
+        uses: distributhor/workflow-webhook@v3
+        with:
+          webhook_url: ${{ secrets.WEBHOOK_URL_GERI }}
