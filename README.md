@@ -23,7 +23,7 @@ A MongoDB adatbázisban az alábbi entitások vannak eltárolva:
 
 ## Deployment
 
-Az alkalmazás OpenShift környezetbe történő kitelepítéséhez az alábbi lépéseket kellett megtennünk:
+Az alkalmazás OpenShift környezetbe történő kitelepítéséhez az alábbi lépéseken kellett végigmennünk:
 - A GitHub repo secret-ek közé fel kellett vennünk egy DockerHub account felhasználónevét és jelszavát, amely alá push-olásra kerül a backendből buildelt Docker image.
 - Egy GitHub Actions Workflow segítségével beállítottuk, hogy a repo-ba történő push hatására elkészüljön egy új Docker image, és feltöltésre kerüljön az előző DockerHub account alá egy image repository-ba.
 - Bitnami Helm repository hozzáadása OpenShift-en (Developer/Helm/Repositories).
