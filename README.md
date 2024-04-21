@@ -31,7 +31,7 @@ Az alkalmazás OpenShift környezetbe történő kitelepítéséhez az alábbi l
 - Ezután létre kellett hozni egy Deployment-et, ami a backendből build-elt Docker image-et futtatja (Developer/+Add/Import from Git), amelyhez meg kellett adni a GitHub repo URL-t, továbbá Dockerfile Import Strategy lett kiválasztva. A repo-ban lévő Dockerfile a legutoljára build-elt image-re mutat. Ezen kívül meg kellett adni egy környezeti változót CONNECTION_STRING néven, amely segítségével a backend csatlakozni tud a MongoDB adatbázishoz (Administrator/Workloads/Deployment alatt a Deployment-et kiválasztva, és azon belül az Environment tab).
 - A GitHub repo secret-ek közé ezután felvettük a Developer/Builds/<build neve>/WebHooks szekció alatt található Generic WebHook URL-t.
 - A Github Actions Workflow kiegészítettük, hogy minden push hatására, a Docker image build-elése után frissüljön az OpenShift build, a WebHook URL segítségével.
-- A MongoDB StatefulSet-re beállítottuk, hogy manuálisan 1 Pod-ban kerüljön futtatásra, míg a Backend Deployment-re automatikus skálázás lett bekapcsolva.
+- A MongoDB StatefulSet-re beállítottuk, hogy 1 példányban kerüljön futtatásra, míg a Backend Deployment-re automatikus skálázás lett bekapcsolva.
 
 ## API
 - GET /: redirect to /list
