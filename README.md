@@ -10,7 +10,7 @@
 - [x] Felhasználókezelés (regisztráció, belépés, kilépés).
 - [x] Feltöltés, törlés csak bejelentkezett felhasználónak engedélyezett.
 
-Az alkalmazást OpenShift platformra telepítettük ki (OpenShift Dedicated). A fejlesztéshez a Kotlin nyelvet választottuk, a backend-hez a Ktor library, míg a frontend-hez a Kotlin HTML DSL-t használtunk, amellyel server-side renderinghez hasonló elven állítható elő a webes felület.<br>
+Az alkalmazást OpenShift platformra telepítettük ki (OpenShift Developer Sandbox). A fejlesztéshez a Kotlin nyelvet választottuk, a backend-hez a Ktor library, míg a frontend-hez a Kotlin HTML DSL-t használtunk, amellyel server-side renderinghez hasonló elven állítható elő a webes felület.<br>
 A kitelepített alkalmazás 2 Pod-ból áll:
 - Backend: Ebben fut a Kotlinban implementált alkalmazás, Deployment-ként van kitelepítve.
 - MongoDB: Ebben egy MongoDB szerver fut, StatefulSet-ként van kitelepítve, az OpenShift automatikusan létrehoz hozzá egy PersistentVolume-ot, hogy az adatok ne vesszenek el a pod leállásakor.
