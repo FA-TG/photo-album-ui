@@ -8,9 +8,13 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.asFlow
+import kotlinx.coroutines.reactive.awaitFirstOrNull
 import kotlinx.coroutines.withContext
+import org.bson.Document
+import org.bson.types.ObjectId
 import org.litote.kmongo.bson
 import org.litote.kmongo.coroutine.coroutine
+import org.litote.kmongo.util.idValue
 import org.reactivestreams.Publisher
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
@@ -73,5 +77,13 @@ class PictureRepository(
         val byteArrayOutputStream = ByteArrayOutputStream()
         byteBuffers.forEach { byteArrayOutputStream.write(it.array()) }
         return byteArrayOutputStream.toByteArray()
+    }
+
+    suspend fun deletePicture(name: String) {
+        val file = bucket.find("{ filename : '$name' }".bson).awaitFirstOrNull()
+
+        if (file != null) {
+            bucket.delete(file.id)
+        }
     }
 }
