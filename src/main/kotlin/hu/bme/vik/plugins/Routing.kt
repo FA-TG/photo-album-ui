@@ -30,6 +30,10 @@ fun Application.configureRouting() {
             call.respondRedirect("/list")
         }
         get("/list") {
+            if (call.parameters["orderBy"] != "name" && call.parameters["orderBy"] != "date") {
+                call.respondRedirect("/list?orderBy=name")
+            }
+
             val posts = repository.getAllPicture()
 
             call.respondHtmlTemplate(LayoutTemplate(call.sessions.get<UserSession>())) {
@@ -37,6 +41,36 @@ fun Application.configureRouting() {
                     +"List"
                 }
                 content {
+                    if (call.parameters["orderBy"] == "name") {
+                        div {
+                            style = "display: inline-block;"
+                            +"Order by name"
+                        }
+                    } else {
+                        a {
+                            style = "display: inline-block;"
+                            href = "/list?orderBy=name"
+                            div {
+                                +"Order by name"
+                            }
+                        }
+                    }
+
+                    if (call.parameters["orderBy"] == "date") {
+                        div {
+                            style = "display: inline-block;"
+                            +"Order by date"
+                        }
+                    } else {
+                        a {
+                            style = "display: inline-block;"
+                            href = "/list?orderBy=date"
+                            div {
+                                +"Order by date"
+                            }
+                        }
+                    }
+
                     posts.forEach { post ->
                         div {
                             a {
