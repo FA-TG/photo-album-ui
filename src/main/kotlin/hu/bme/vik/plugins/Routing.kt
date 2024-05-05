@@ -34,7 +34,15 @@ fun Application.configureRouting() {
                 call.respondRedirect("/list?orderBy=name")
             }
 
-            val posts = repository.getAllPicture()
+            var posts = repository.getAllPicture()
+
+            if (call.parameters["orderBy"] == "name") {
+                posts = posts.sortedBy { it.name }
+            }
+
+            if (call.parameters["orderBy"] == "date") {
+                posts = posts.sortedBy { it.date }
+            }
 
             call.respondHtmlTemplate(LayoutTemplate(call.sessions.get<UserSession>())) {
                 articleTitle {
