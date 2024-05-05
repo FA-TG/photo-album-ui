@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px 0;
+}
+
+.top-header .header {
+    margin: 0 10px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 20px; /* Eltolja a címet, hogy ne legyen a fejléc közepén */
+}
+
+hr {
+    margin: 20px auto;
+    width: 50%;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+form {
+    margin: 20px auto;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.options {
+    text-align: center;
+}
+
+.options .option {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.options .option:hover {
+    color: #007bff;
+}
+
+.posts {
+    text-align: center;
+}
+
+.post {
+    margin: 10px auto; /* Margin az egyenletes elhelyezéshez */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%; /* Az egyenletes szélesség érdekében */
+    max-width: 600px; /* Maximum szélesség beállítása */
+    box-sizing: border-box; /* A padding és border hozzáadása a szélességhez */
+}
+
+.post a {
+    text-decoration: none;
+    color: #333;
+}
+
+.post a:hover {
+    color: #666;
+}
+
+.single-post {
+    width: 30%; /* A képernyő 70%-át foglalja el */
+    max-width: 30%; /* A maximális szélesség beállítása */
+    margin: 20px auto; /* Középre igazítás és távolság a többi tartalomtól */
+}
+
+.single-post img {
+    width: 100%; /* A kép teljes szélességet foglal */
+    height: auto; /* A képarány megtartása */
+    display: block; /* Kép blokk elemmé alakítása */
+    margin: 0 auto; /* Középre igazítás */
+}
+
+.upload {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload input[type="file"] {
+    display: block;
+    margin: 0 auto;
+}
+
+.upload input[type="submit"] {
+    display: block;
+    margin: 20px auto 0;
+}
+
+#imagePreview {
+    width: 80%; /* A képernyő 70%-át foglalja el */
+    max-width: 80%; /* A maximális szélesség beállítása */
+    margin: 20px auto; /* Középre igazítás és távolság a többi tartalomtól */
+}
+
+#imagePreview img {
+    width: 100%; /* A kép teljes szélességet foglal */
+    height: auto; /* A képarány megtartása */
+    display: block; /* Kép blokk elemmé alakítása */
+    margin: 0 auto; /* Középre igazítás */
+}

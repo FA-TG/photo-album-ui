@@ -9,44 +9,47 @@ class LayoutTemplate(val userSession: UserSession?): Template<HTML> {
     val content = Placeholder<FlowContent>()
     override fun HTML.apply() {
         head {
-            link(rel = "stylesheet", href = "/style/index.css", type = "text/css")
+            link(rel = "stylesheet", href = "/static/index.css", type = "text/css")
         }
         body {
-            h1 {
+            div(classes = "top-header") {
+                div(classes = "header") {
+                    a {
+                        href = "/list"
+                        p { +"List" }
+                    }
+                }
+                div(classes = "header") {
+                    a {
+                        href = "/upload"
+                        p { +"Upload" }
+                    }
+                }
+                userSession?.let {
+                    div(classes = "header") {
+                        a {
+                            href = "/logout"
+                            p { +"Logout" }
+                        }
+                    }
+                } ?: run {
+                    div(classes = "header") {
+                        a {
+                            href = "/login"
+                            p { +"Login" }
+                        }
+                    }
+                    div(classes = "header") {
+                        a {
+                            href = "/register"
+                            p { +"Register" }
+                        }
+                    }
+                }
+            }
+
+            h1(classes = "title") {
                 insert(articleTitle)
-            }
-            div {
-                a {
-                    href = "/list"
-                    p { +"List" }
-                }
-            }
-            div {
-                a {
-                    href = "/upload"
-                    p { +"Upload" }
-                }
-            }
-            userSession?.let {
-                div {
-                    a {
-                        href = "/logout"
-                        p { +"Logout" }
-                    }
-                }
-            } ?: run {
-                div {
-                    a {
-                        href = "/login"
-                        p { +"Login" }
-                    }
-                }
-                div {
-                    a {
-                        href = "/register"
-                        p { +"Register" }
-                    }
-                }
             }
 
             hr {  }

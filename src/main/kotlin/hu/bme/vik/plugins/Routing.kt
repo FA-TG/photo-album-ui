@@ -49,55 +49,58 @@ fun Application.configureRouting() {
                     +"List"
                 }
                 content {
-                    if (call.parameters["orderBy"] == "name") {
-                        div {
-                            style = "display: inline-block;"
-                            +"Order by name"
-                        }
-                    } else {
-                        a {
-                            style = "display: inline-block;"
-                            href = "/list?orderBy=name"
-                            div {
+                    div(classes = "options") {
+                        if (call.parameters["orderBy"] == "name") {
+                            div(classes = "option") {
+                                style = "display: inline-block;"
                                 +"Order by name"
                             }
+                        } else {
+                            a(classes = "option") {
+                                style = "display: inline-block;"
+                                href = "/list?orderBy=name"
+                                div {
+                                    +"Order by name"
+                                }
+                            }
                         }
-                    }
 
-                    if (call.parameters["orderBy"] == "date") {
-                        div {
-                            style = "display: inline-block;"
-                            +"Order by date"
-                        }
-                    } else {
-                        a {
-                            style = "display: inline-block;"
-                            href = "/list?orderBy=date"
-                            div {
+                        if (call.parameters["orderBy"] == "date") {
+                            div(classes = "option") {
+                                style = "display: inline-block;"
                                 +"Order by date"
+                            }
+                        } else {
+                            a(classes = "option") {
+                                style = "display: inline-block;"
+                                href = "/list?orderBy=date"
+                                div {
+                                    +"Order by date"
+                                }
                             }
                         }
                     }
 
-                    posts.forEach { post ->
-                        div {
-                            a {
-                                href = "/detail/${post.name}"
-                                div {
-                                    p { +"Name: ${post.name}" }
-                                }
-                                div {
-                                    p { +"Date: ${post.date.format()}" }
-                                }
-                                call.sessions.get<UserSession>()?.let {
-                                    form(action = "/delete/${post.name}", method = FormMethod.post) {
-                                        p {
-                                            submitInput { value = "Delete" }
+                    div(classes = "posts") {
+                        posts.forEach { post ->
+                            div(classes = "post") {
+                                a {
+                                    href = "/detail/${post.name}"
+                                    div {
+                                        p { +"Name: ${post.name}" }
+                                    }
+                                    div {
+                                        p { +"Date: ${post.date.format()}" }
+                                    }
+                                    call.sessions.get<UserSession>()?.let {
+                                        form(action = "/delete/${post.name}", method = FormMethod.post) {
+                                            p {
+                                                submitInput { value = "Delete" }
+                                            }
                                         }
                                     }
                                 }
                             }
-                            hr {  }
                         }
                     }
                 }
@@ -116,7 +119,7 @@ fun Application.configureRouting() {
                     +"Detail"
                 }
                 content {
-                    div {
+                    div(classes = "single-post") {
                         div {
                             img {
                                 src = "/images/${post!!.name}"
@@ -153,18 +156,28 @@ fun Application.configureRouting() {
                             +"Upload"
                         }
                         content {
-                            form(action = "/upload", encType = FormEncType.multipartFormData, method = FormMethod.post) {
-                                p {
-                                    +"Image:"
-                                    fileInput {
-                                        name = "image"
-                                        accept = "image/*"
+                            div(classes = "upload") {
+                                form(
+                                    action = "/upload",
+                                    encType = FormEncType.multipartFormData,
+                                    method = FormMethod.post
+                                ) {
+                                    p {
+                                        +"Image:"
+                                        fileInput {
+                                            name = "image"
+                                            id = "image"
+                                            onChange = "previewImage(event)"
+                                            accept = "image/*"
+                                        }
                                     }
-                                }
-                                p {
-                                    submitInput { value = "Upload" }
+                                    p {
+                                        submitInput { value = "Upload" }
+                                    }
+                                    div { id = "imagePreview" }
                                 }
                             }
+                            script(src = "/static/imagePreview.js") {  }
                         }
                     }
                 }

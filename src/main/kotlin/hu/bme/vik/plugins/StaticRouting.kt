@@ -6,6 +6,6 @@ import io.ktor.server.routing.*
 
 fun Application.configureStaticRouting() {
     routing {
-        staticResources("/style", "css")
+        staticResources("/static", "static")
     }
 }
