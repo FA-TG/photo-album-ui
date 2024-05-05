@@ -89,15 +89,14 @@ fun Application.configureRouting() {
 
             call.respondBytes(repository.getPicture(name))
         }
-        delete("/images/{name}") {
-            val name = call.parameters["name"]!!
-
-            repository.deletePicture(name)
-
-            call.respondRedirect("/list")
-        }
-
         authenticate("auth-form") {
+            post("/delete/{name}") {
+                val name = call.parameters["name"]!!
+
+                repository.deletePicture(name)
+
+                call.respondRedirect("/list")
+            }
             route("upload") {
                 get {
                     call.respondHtmlTemplate(LayoutTemplate(call.sessions.get<UserSession>())) {
