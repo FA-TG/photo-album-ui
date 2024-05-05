@@ -2,10 +2,10 @@
 
 ## Elkészült funkciók
 - [x] Fényképek feltöltése
-- [ ] Fényképek törlése
+- [x] Fényképek törlése
 - [x] Minden fényképnek legyen neve (max. 40 karakter), és feltöltési dátuma (év-hó-nap óra:perc)
 - [x] Fényképek nevének és dátumának listázása.
-- [ ] Fényképek listázása név és dátum szerint rendezve.
+- [x] Fényképek listázása név és dátum szerint rendezve.
 - [x] Lista egy elemére kattintva mutassa meg a név mögötti képet.
 - [x] Felhasználókezelés (regisztráció, belépés, kilépés).
 - [x] Feltöltés, törlés csak bejelentkezett felhasználónak engedélyezett.
@@ -35,11 +35,13 @@ Az alkalmazás OpenShift környezetbe történő kitelepítéséhez az alábbi l
 
 ## API
 - GET /: redirect to /list
-- GET /list: Kilistázza a feltöltött képeket
+- GET /list?orderBy=name Kilistázza a feltöltött képeket név szerint rendezve
+- GET /list?orderBy=date Kilistázza a feltöltött képeket feltöltési dátum szerint rendezve
 - GET /detail/{name}: Megjeleníti a képet, és a nevét+dátumát
 - GET /images/{name}: Ezzel tölthető le egy adott kép
 - GET /upload: Feltöltés oldal megnyitása (de csak akkor, ha be van jelentkezve).
 - POST /upload: Feltölti a képet, és elmenti az adatbázisba, majd redirect to /list
+- POST /delete/{name}: Törli az adott képet
 - GET /login: Bejelentkező felület
 - POST /login: Bejelentkezés: Ellenőrzi, hogy érvényesek-e a session adatok, majd elmenti a sessiont (Ktor kezeli).
 - GET /logout: Kijelentkeztet, majd redirect to /list
