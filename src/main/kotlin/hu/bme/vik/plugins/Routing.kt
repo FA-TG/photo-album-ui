@@ -47,6 +47,11 @@ fun Application.configureRouting() {
                                 div {
                                     p { +"Date: ${post.date.format()}" }
                                 }
+                                form(action = "/delete/${post.name}", method = FormMethod.post) {
+                                    p {
+                                        submitInput { value = "Delete" }
+                                    }
+                                }
                             }
                             hr {  }
                         }
